@@ -1,0 +1,31 @@
+apiVersion: route.openshift.io/v1
+kind: Route
+metadata:
+  annotations:
+    openshift.io/host.generated: "true"
+  creationTimestamp: "2022-06-29T04:28:15Z"
+  labels:
+    app: thanos-receive
+  name: thanos-receive
+  namespace: monitoring
+  resourceVersion: "7337480"
+  uid: 0b337195-0095-4d50-be96-b7ec36b1bbd2
+spec:
+  host: thanos-receive-monitoring.apps.ospscluster.lab.pnq2.cee.redhat.com
+  port:
+    targetPort: http
+  to:
+    kind: Service
+    name: thanos-receive
+    weight: 100
+  wildcardPolicy: None
+status:
+  ingress:
+  - conditions:
+    - lastTransitionTime: "2022-06-29T04:28:15Z"
+      status: "True"
+      type: Admitted
+    host: thanos-receive-monitoring.apps.ospscluster.lab.pnq2.cee.redhat.com
+    routerCanonicalHostname: router-default.apps.ospscluster.lab.pnq2.cee.redhat.com
+    routerName: default
+    wildcardPolicy: None

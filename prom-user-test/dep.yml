@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: prom-test 
+  labels:
+    app: prom-test
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: prom-test 
+  template:
+    metadata:
+      labels:
+        app: prom-test
+    spec:
+      containers:
+      - name: app
+        image: quay.io/cpranava0/hpa-mon:v1
