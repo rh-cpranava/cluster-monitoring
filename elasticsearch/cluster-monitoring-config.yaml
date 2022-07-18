@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: cluster-monitoring-config
+  namespace: openshift-monitoring
+data:
+  config.yaml: |
+    prometheusK8s:
+      remoteWrite:
+         - url: "http://metricbeat-beat-metricbeat-elasticsearch-test.apps.cluster-f4c76.f4c76.sandbox474.opentlc.com/write"
+           tlsConfig:
+             insecure_skip_verify: yes

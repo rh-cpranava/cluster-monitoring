@@ -1,0 +1,41 @@
+apiVersion: beat.k8s.elastic.co/v1beta1
+kind: Beat
+metadata:
+  name: metricbeat
+  namespace: elasticsearch-test
+spec:
+  KibanaRef:
+    name: kibana 
+  elasticsearchRef:
+    name: elasticsearch
+  config:
+    metricbeat:
+      modules:
+        - host: 0.0.0.0 
+          metricsets:
+            - remote_write
+          module: prometheus
+          port: 9201
+  deployment:
+    podTemplate:
+      metadata:
+        creationTimestamp: null
+      spec:
+        containers:
+          - name: metricbeat
+            ports:
+              - containerPort: 9201
+            securityContext:
+              privileged: true
+              runAsUser: 0
+            resources:
+              requests:
+                 memory: 4Gi
+                 cpu: 1
+              limits:
+                 memory: 12Gi
+                 cpu: 4
+        serviceAccountName: metricbeat
+    replicas: 3
+  type: metricbeat
+  version: 8.2.0
